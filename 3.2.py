@@ -8,12 +8,12 @@ class Worker:
 
 class Pupa(Worker):
     def do_work(self, filename1, filename2):
-        do_work('+', filename1, filename2)
+        do_work('1', filename1, filename2)
 
 
 class Lupa(Worker):
     def do_work(self, filename1, filename2):
-        do_work('-', filename1, filename2)
+        do_work('-1', filename1, filename2)
 
 
 class Accountant:
@@ -21,6 +21,8 @@ class Accountant:
         if isinstance(worker, Worker):
             worker.take_money(how_much)
             print('Just paid')
+        else:
+            print('Its not worker')
 
 
 def get_mx(path):
@@ -47,10 +49,7 @@ def do_work(op, filename1, filename2):
         raise Exception('Bad inputs. Matrices should be the same size')
     for i in range(len(a)):
         for j in range(len(a[0])):
-            if op == '-':
-                print(f'{a[i][j] - b[i][j]}', end=' ')
-            else:
-                print(f'{a[i][j] + b[i][j]}', end=' ')
+            print(f'{a[i][j] + int(op) * b[i][j]}', end=' ')
         print('\n')
 
 
