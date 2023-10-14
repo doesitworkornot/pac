@@ -13,9 +13,12 @@ a = np.random.randint(0, 255, size=(m, n))
 print(len(np.unique(a)))
 
 print('\nTask 3')
+
+
 def moving_avg(x, n):
     cumsum = np.cumsum(np.insert(x, 0, 0))
     return (cumsum[n:] - cumsum[:-n]) / float(n)
+
 
 a = np.random.randint(0, 255, size=10)
 n = 3
@@ -27,8 +30,10 @@ m = 10
 n = 3
 a = np.random.randint(0, 15, size=(m, n))
 
+
 def is_good(a):
-    return (a[0] + a[1] > a[2] and a[1] + a[2] > a[0] and a[0] + a[2] > a[1])
+    return a[0] + a[1] > a[2] and a[1] + a[2] > a[0] and a[0] + a[2] > a[1]
+
 
 print(a[np.apply_along_axis(is_good, 1, a)])
 
