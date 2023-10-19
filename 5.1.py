@@ -8,7 +8,7 @@ print(df[df > 0.3].mean(axis=1))
 
 
 print('\nTask 2')
-df2 = pd.read_csv('data/wells_info.csv', index_col=0)  # Reading from csv
+df2 = pd.read_csv('data/lab5/wells_info.csv', index_col=0)  # Reading from csv
 
 # Converting to datetime format
 df2['CompletionDate'] = pd.to_datetime(df2['CompletionDate'])
@@ -27,7 +27,7 @@ print(df_)
 
 
 print('\nTask 3')
-df3 = pd.read_csv('data/wells_info_na.csv', index_col=0)  # Reading from csv
+df3 = pd.read_csv('data/lab5/wells_info_na.csv', index_col=0)  # Reading from csv
 
 # Head on variant
 # df3['LatWGS84'] = df3['LatWGS84'].fillna(df3['LatWGS84'].mean())

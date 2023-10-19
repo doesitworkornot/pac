@@ -3,7 +3,7 @@ import numpy as np
 
 
 def main():
-    df = pd.read_csv('data/titanic_with_labels.csv')
+    df = pd.read_csv('data/lab5/titanic_with_labels.csv')
     ind = df[(df['sex'] != 'М') & (df['sex'] != 'Ж')].index
     df.drop(ind, inplace=True)
     df.sex.replace(['М', 'Ж'], ['1', '0'], inplace=True)
@@ -11,7 +11,7 @@ def main():
     df.loc[df.liters_drunk < 0, 'liters_drunk'] = np.nan
     df.liters_drunk = hampel(df.liters_drunk)
     df.liters_drunk = df.liters_drunk.fillna(df.liters_drunk.mean())
-    df.to_csv('data/res.csv')
+    df.to_csv('data/lab5/res.csv')
 
 
 def hampel(vals_orig):
