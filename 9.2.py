@@ -21,8 +21,8 @@ def main():
     tree_res = des_tree(feature_train, target_train, feature_test)
     acc(tree_res, target_test, 'Decision Tree')
 
-    n_tree_res = des_tree_n(feature_train, target_train, feature_test, 2)
-    acc(n_tree_res, target_test, 'N Decision Tree')  # Isn't magick happening here?
+    n_tree_res = des_tree_n(feature_train, target_train, feature_test, 1)
+    acc(n_tree_res, target_test, 'N Decision Tree')  # Isn't magic happening here?
 
     xgboost_res = xgboost(feature_train, target_train, feature_test)
     acc(xgboost_res, target_test, 'XGBOOST')
