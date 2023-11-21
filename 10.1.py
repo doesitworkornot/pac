@@ -2,6 +2,7 @@ import torchvision
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.manifold import TSNE
+from sklearn.metrics import accuracy_score
 
 
 def main():
@@ -24,7 +25,6 @@ def main():
 
     # Making average form for each digit from 0 to 9
     avg = [average_digit(train, x) for x in range(10)]
-
     # Calculating dot product of test image and average one
     # And choosing the biggest one, making at index of that 1 else 0
     predicted = predict(test, avg)
@@ -33,7 +33,9 @@ def main():
 
     # Accuracy check
     test_ans = [x[1] for x in test]
-    acc(predicted_ans, test_ans, 'Some convolution')
+    test_ans = np.reshape(test_ans, (10000, 10))
+    predicted_ans = np.array(predicted_ans)
+    print('Current accuracy is :', accuracy_score(predicted_ans, test_ans))
 
     # Some visualization
     x = np.array([np.reshape(x[0][0].numpy(), (784,)) for x in train_dataset])
@@ -71,20 +73,15 @@ def average_digit(data, digit):
 def predict(test, avg):
     test = [x[0] for x in test]
     ans = []
+    avg_product = [np.dot(np.transpose(avg[i]), avg[i]) for i in range(len(avg))]
     for x in test:
         x = np.transpose(x)
-        ans.append([np.dot(x, av) for av in avg])
-
+        ans.append([(np.dot(x, avg[av]) - avg_product[av]/1.3) for av in range(len(avg))])
     return ans
 
 
-def acc(pred, target, alg):
-    accuracy = np.sum([np.dot(target[i].T, pred[i]) for i in range(len(pred))])/len(pred)
-    print(f'{alg} accuracy is {accuracy}')
-
-
 def tsne_plot(x_subset, y_subset, name):
-    tsne = TSNE(random_state=42, n_components=2, verbose=0, perplexity=5, n_iter=300).fit_transform(x_subset)
+    tsne = TSNE(random_state=30, n_components=2, verbose=0, perplexity=3, n_iter=250).fit_transform(x_subset)
     plt.scatter(tsne[:, 0], tsne[:, 1], s=5, c=y_subset, cmap='Spectral')
     plt.gca().set_aspect('equal', 'datalim')
     plt.colorbar(boundaries=np.arange(11) - 0.5).set_ticks(np.arange(10))
