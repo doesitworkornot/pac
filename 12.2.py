@@ -52,9 +52,9 @@ class Net(nn.Module):
 def main():  # Hell yeah
     is_train = input('Should we train or just load. y/n: ')
 
-    path = './cifar_net.pth'
+    path = './net/cifar_net.pth'
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-    device = torch.device('cpu')
+    device = torch.device('cpu')  # Cpu just faster
 
     transform = transforms.Compose(
         [transforms.ToTensor(),
