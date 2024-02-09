@@ -16,7 +16,7 @@ class NeuralNetwork:
     def forward(self, x):
         x = f.softmax((x @ self.w1) + self.b1, dim=1)
         x = f.tanh((x @ self.w2) + self.b2)
-        x = (x @ self.w3) + self.b3  # IDK but using third activation function reduces accuracy
+        x = (x @ self.w3) + self.b3 
         return x
 
     def study(self, x, target, learning_rate=0.001, num_epochs=1000):
